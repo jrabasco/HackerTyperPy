@@ -3,6 +3,7 @@
 import curses
 import random
 import argparse
+import os
 
 
 def main():
@@ -14,29 +15,30 @@ def main():
                                               "stroke.", required=False, default=4, type=int)
     args = parser.parse_args()
 
+    root = os.path.dirname(os.path.realpath(__file__))
     if args.test:
-        input_file = "test"
+        input_file = root + "/test"
     else:
-        input_file = "in" + str(random.randint(1, 8))
-    speed = args.speed
-    default_screen = curses.initscr()
-    curses.start_color()
-    curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
-    default_screen.clear()
-    max_xy = default_screen.getmaxyx()
-    y_dim = max_xy[0]
-    if args.test and y_dim > 10:
-        y_dim = 10
-    x_dim = max_xy[1]
-    pad = curses.newpad(y_dim, x_dim)
-    pad.attrset(curses.color_pair(1))
-    pad.refresh(0, 0, 0, 0, y_dim - 1, x_dim - 1)
+        input_file = root + "/in" + str(random.randint(1, 8))
     text_file = open(input_file)
-    if not args.test:
-        text_file.seek(random.randrange(30000))
-
-    exit_program = False
     try:
+        speed = args.speed
+        default_screen = curses.initscr()
+        curses.start_color()
+        curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
+        default_screen.clear()
+        max_xy = default_screen.getmaxyx()
+        y_dim = max_xy[0]
+        if args.test and y_dim > 10:
+            y_dim = 10
+        x_dim = max_xy[1]
+        pad = curses.newpad(y_dim, x_dim)
+        pad.attrset(curses.color_pair(1))
+        pad.refresh(0, 0, 0, 0, y_dim - 1, x_dim - 1)
+        if not args.test:
+            text_file.seek(random.randrange(30000))
+
+        exit_program = False
         pos = 0
         while True:
             key = pad.getch()
