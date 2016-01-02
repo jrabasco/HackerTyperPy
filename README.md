@@ -10,4 +10,5 @@ This project requires only python 3.
 
 ## Usage
 
+Press ```ESC``` to escape the program at any moment.
 Run the script with the ```-h``` option to have information on the parameters.

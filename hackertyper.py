@@ -6,7 +6,8 @@ import argparse
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Hacker typer to impress your friends !")
+    parser = argparse.ArgumentParser(description="Hacker typer to impress your friends! Press ESC at any moment to "
+                                                 "exit the program.")
     parser.add_argument("-t", "--test", action="store_true", help="Testing mode, uses a shorter file and a shorter"
                                                                   "window.")
     parser.add_argument("-s", "--speed", help="Typing speed, i.e. number of characters per key"
